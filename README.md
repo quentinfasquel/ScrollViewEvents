@@ -8,6 +8,10 @@ SwiftUI ScrollView Modifier to handle the following scroll events:
 - didEndDecelerating
 - didEndScrollingAnimation
 
+This is compatible with `ScrollViewReader`, any custom-reading of the scrollView's contentOffset will work as well.
+
+See example below:
+
 ```
 struct ContentView: View {
    var body: some View {
