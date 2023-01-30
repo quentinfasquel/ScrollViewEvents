@@ -116,10 +116,14 @@ class ScrollViewUIHostingController<Content: View>: UIHostingController<Content>
         super.viewDidAppear(animated)
     }
 
-    override func didMove(toParent parent: UIViewController?) {
-        super.didMove(toParent: parent)
-        if parent != nil, let viewHost = view.superview, scrollView != nil {
-            let contentSize = view.intrinsicContentSize
+    private var intrinsinctContentSize: CGSize = .zero
+
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+
+        let contentSize = view.intrinsicContentSize
+        if let viewHost = parent?.view, contentSize != intrinsinctContentSize {
+            intrinsinctContentSize = contentSize
             size.wrappedValue = CGSize(
                 width: min(viewHost.bounds.width, contentSize.width),
                 height: min(viewHost.bounds.height, contentSize.height))
